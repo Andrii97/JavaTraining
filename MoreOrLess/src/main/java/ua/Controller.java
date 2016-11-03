@@ -6,10 +6,6 @@ import java.util.Scanner;
  * Created by andrii on 30.10.16.
  */
 public class Controller {
-    // The Constants
-    public static final int leftLimitRange = 0;
-    public static final int rightLimitRange = 100;
-
     Model model;
     View view;
 
@@ -25,43 +21,58 @@ public class Controller {
 
     /**
      * Run game:
-     * 1) generate value
-     * 2) get userValue
-     * 3) check value, change range
-     * 4) show game information
-     * 5) go to step 2, until userValue != correctValue
-     * 6) show history of attempts
+     * set barriers
+     * set secret value
+     * while not correct value read and user value
+     * show history of attempts
      */
     public void runGame(){
-        model.generateValue(leftLimitRange, rightLimitRange);
-
         Scanner sc = new Scanner(view.INPUT_STREAM);
-        boolean isFinishState = false;
-        while (!isFinishState) {
-            view.printMessage(view.LIST_OF_ATTEMPTS);
-            view.printListOfAttempts(model.getListOfAttempts());
-            view.printMessageAndLimitOrRange(view.CURRENT_RANGE,
-                    model.getLeftLimit(), model.getRightLimit());
-            isFinishState = model.isCorrectValue(inputIntValueWithScanner(sc));
-        }
-        view.printMessage(view.VICTORY);
+
+        model.setPrimaryBarrier(GlobalConstants.PRIMARY_MIN_BARRIER,
+                GlobalConstants.PRIMARY_MAX_BARRIER);
+        model.setSecretValue();
+        // System.out.println(model.getSecretValue());
+        while (!model.isCorrectValue(inputIntValueWithScanner(sc))){}
+
+        view.printMessage(View.CONGRATULATION + model.getSecretValue());
         view.printMessage(view.LIST_OF_ATTEMPTS);
-        view.printListOfAttempts(model.getListOfAttempts());
+        view.printList(model.getListOfAttempts());
         view.printMessage(view.NUMBER_OF_ATTEMPTS + model.getListOfAttempts().size());
     }
+
+    // The Utility methods
 
     /**
      * Scan stream and recognize integer value
      * @param sc Input stream
-     * @return integer value
+     * @return Integer value in the current range [maxBarrier; minBarrier]
      */
     public int inputIntValueWithScanner(Scanner sc) {
+        int res = 0;
+        view.printMessageAndLimitOrRange(view.CURRENT_RANGE,
+                model.getMinBarrier(), model.getMaxBarrier());
         view.printMessage(view.INPUT_INT_DATA);
-        while (! sc.hasNextInt()) {
-            view.printMessage(view.WRONG_INPUT_INT_DATA + "\n" + view.INPUT_INT_DATA);
-            sc.next();
+        while( true ) {
+            // check int - value
+            while (!sc.hasNextInt()) {
+                view.printMessage(View.WRONG_INPUT_INT_DATA);
+                view.printMessage(View.CURRENT_RANGE);
+                view.printMessage(View.INPUT_INT_DATA);
+                sc.next();
+            }
+            // check value in diapason
+            if ((res = sc.nextInt()) <= model.getMinBarrier() ||
+                    res >= model.getMaxBarrier()) {
+                view.printMessage(View.WRONG_RANGE_DATA);
+                view.printMessageAndLimitOrRange(view.CURRENT_RANGE,
+                        model.getMinBarrier(), model.getMaxBarrier());
+                view.printMessage(View.INPUT_INT_DATA);
+                continue;
+            }
+            break;
         }
-        return sc.nextInt();
+        return res;
     }
 
 }

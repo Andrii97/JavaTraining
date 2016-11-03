@@ -8,12 +8,13 @@ import java.io.InputStream;
  */
 public class View {
     // Text's constants
-    public static final String INPUT_INT_DATA = "Input INT value = ";
+    public static final String INPUT_INT_DATA = "Please, input INT value in appropriate range = ";
     public static final String WRONG_INPUT_INT_DATA = "Wrong input! Repeat please! ";
     public static final String LIST_OF_ATTEMPTS = "List of your attempts: ";
     public static final String CURRENT_RANGE = "Current range [%d;%d]\n";
-    public static final String VICTORY = "You won";
     public static final String NUMBER_OF_ATTEMPTS = "Number of attempts ";
+    public static final String WRONG_RANGE_DATA = "Wrong range! Repeat please! ";
+    public static final String CONGRATULATION = "CONGRATULATION!!! Secret value = ";
     public static final InputStream INPUT_STREAM = System.in;
 
     /**
@@ -27,19 +28,19 @@ public class View {
     /**
      * Add limits of the range to message, print range
      * @param message information to print
-     * @param leftLimit
-     * @param rightLimit
+     * @param minBarrier Minimum barrier of range
+     * @param maxBarrier Maximum barrier of range
      */
-    public void printMessageAndLimitOrRange(String message, int leftLimit, int rightLimit){
-        System.out.format(message, leftLimit, rightLimit);
+    public void printMessageAndLimitOrRange(String message, int minBarrier, int maxBarrier){
+        System.out.format(message, minBarrier, maxBarrier);
     }
 
     /**
-     * Print list of attempts
-     * @param listOfAttempts information to print
+     * Print list
+     * @param list information to print
      */
-    public void printListOfAttempts(ArrayList<Integer> listOfAttempts){
-        System.out.println(listOfAttempts);
+    public void printList(ArrayList<Integer> list){
+        System.out.println(list);
     }
 
 }

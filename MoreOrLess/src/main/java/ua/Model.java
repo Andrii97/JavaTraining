@@ -1,88 +1,85 @@
 package ua;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * Created by andrii on 30.10.16.
  */
 public class Model {
-    private int value;
+    /**
+     * It is secret value, which player need to guess
+     */
+    private int secretValue;
+    /**
+     * It is a list, which is used for saving history of attempts
+     */
     private ArrayList<Integer> listOfAttempts;
-    private int rightLimit;
-    private int leftLimit;
+    /**
+     * It is a max barrier of current range
+     */
+    private int maxBarrier;
+    /**
+     * It is a min barrier of current range
+     */
+    private int minBarrier;
 
     // Constructor
     public Model() {
         listOfAttempts = new ArrayList<>();
     }
 
-    public int getValue() { return value; }
+    // The Program logic
+
+    /**
+     * Check if user value == secretValue, return true
+     * else return false and decrease range (change barrier)
+     * @param userValue Value that a user has entered
+     * @return if userValue == correct secretValue, return true, else return false
+     */
+    public boolean isCorrectValue(int userValue){
+        listOfAttempts.add(userValue);
+        if(userValue == secretValue)
+            return true;
+        if(userValue > secretValue)
+            maxBarrier = userValue;
+        else
+            minBarrier = userValue;
+        return false;
+    }
+
+    /**
+     * Set min and max barriers of range
+     * @param minBarrier Minimum barrier of range
+     * @param maxBarrier Maximum barrier of range. Must be greater than minBarrier
+     */
+    public void setPrimaryBarrier(int minBarrier, int maxBarrier){
+        this.minBarrier = minBarrier; // check
+        this.maxBarrier = maxBarrier;
+    }
+
+    /**
+     * Generate a number and record it in a variable secretValue
+     */
+    public void setSecretValue() {
+        listOfAttempts.clear();
+        secretValue = (int)Math.ceil(Math.random() *
+                (maxBarrier - minBarrier - 1) + minBarrier);
+    }
+
+
+    public int getSecretValue() { return secretValue; }
 
     public ArrayList<Integer> getListOfAttempts() {
         return listOfAttempts;
     }
 
 
-    public int getRightLimit() {
-        return rightLimit;
+    public int getMaxBarrier() {
+        return maxBarrier;
     }
 
-    public int getLeftLimit() {
-        return leftLimit;
-    }
-
-    // The Program logic
-
-    /**
-     * Returns a pseudo-random number between min and max, inclusive.
-     * The difference between min and max can be at most
-     * <code>Integer.MAX_VALUE - 1</code>.
-     * @param min Minimum value
-     * @param max Maximum value.  Must be greater than min.
-     * @return Integer between min and max, inclusive.
-     * @see java.util.Random#nextInt(int)
-     */
-    public int randInt(int min, int max){
-        Random rnd = new Random();
-
-        int randomNum = min + rnd.nextInt(max - min + 1);
-
-        return randomNum;
-    }
-
-    /**
-     * Generate a number and record it in a variable value
-     * @param min Minimum value
-     * @param max Maximum value.  Must be greater than min.
-     */
-    public void generateValue(int min, int max){
-        listOfAttempts.clear();
-        leftLimit = min;
-        rightLimit = max;
-        value = randInt(leftLimit, rightLimit);
-    }
-
-    /**
-     * Check if user correctly specified number and
-     * if userValue is in the range, but it is not a correct value,
-     * move the limit of the range
-     * @param userValue Value that a user has entered
-     * @return if userValue is not int the range, return false
-     * if userValue == correct value, return true
-     * else return false
-     */
-    public boolean isCorrectValue(int userValue){
-        if(userValue > rightLimit || userValue < leftLimit)
-            return false;
-        listOfAttempts.add(userValue);
-        if(userValue == value)
-            return true;
-        if(userValue > value)
-            rightLimit = userValue - 1;
-        else
-            leftLimit = userValue + 1;
-        return false;
+    public int getMinBarrier() {
+        return minBarrier;
     }
 
 }
