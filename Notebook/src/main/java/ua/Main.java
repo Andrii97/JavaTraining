@@ -1,5 +1,9 @@
 package ua;
 
+import ua.controller.Controller;
+import ua.model.Model;
+import ua.view.View;
+
 /**
  * Console input data into a notebook
  *
