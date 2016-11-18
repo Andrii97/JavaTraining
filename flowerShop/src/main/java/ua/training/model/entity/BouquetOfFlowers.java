@@ -8,10 +8,10 @@ import java.util.*;
  */
 public class BouquetOfFlowers implements Salable {
 
-    /**
-     *
-     */
-    private TreeMap<SalableFlower, Integer> flowers;
+//    /**
+//     *
+//     */
+//    private TreeMap<SalableFlower, Integer> flowers;
 
     /**
      *
@@ -24,14 +24,10 @@ public class BouquetOfFlowers implements Salable {
     private LocalDate dateOfSupply;
 
     public BouquetOfFlowers() {
-        flowers = new TreeMap<>();
+        // flowers = new TreeMap<>();
         dateOfSupply = LocalDate.now();
         listOfFlowers = new ArrayList<>();
     }
-
-//    public SortedMap<Double, SalableFlower> sortByFreshness(){
-//        return null;
-//    }
 
     /**
      * Add flower to bouquet of flowers
@@ -42,13 +38,13 @@ public class BouquetOfFlowers implements Salable {
             return;
         }
         listOfFlowers.add(salableFlower);
-        if (flowers.containsKey(salableFlower)) {
-            flowers.replace(
-                    salableFlower,
-                    flowers.get(salableFlower) + 1);
-        } else {
-            flowers.put(salableFlower, 1);
-        }
+//        if (flowers.containsKey(salableFlower)) {
+//            flowers.replace(
+//                    salableFlower,
+//                    flowers.get(salableFlower) + 1);
+//        } else {
+//            flowers.put(salableFlower, 1);
+//        }
     }
 
     /**
@@ -61,18 +57,19 @@ public class BouquetOfFlowers implements Salable {
             return false;
         }
         listOfFlowers.remove(flower);
-        if (flowers.containsKey(flower)) {
-            if (flowers.get(flower) > 1) {
-                flowers.replace(
-                        flower,
-                        flowers.get(flower) - 1
-                );
-            } else {
-                flowers.remove(flower);
-            }
-            return true;
-        }
-        return false;
+        return true;
+//        if (flowers.containsKey(flower)) {
+//            if (flowers.get(flower) > 1) {
+//                flowers.replace(
+//                        flower,
+//                        flowers.get(flower) - 1
+//                );
+//            } else {
+//                flowers.remove(flower);
+//            }
+//            return true;
+//        }
+//        return false;
     }
 
     public void sortByDateOfSupply(){
@@ -108,13 +105,6 @@ public class BouquetOfFlowers implements Salable {
         return result;//flowers.subMap(left, right);
     }
 
-//    public SortedMap<Double, TreeMap<SalableFlower, Integer>> getFlowersByLengthOfPlantStemRange(
-//            double left, double right) {
-//        TreeMap treeMap = new TreeMap<Double, TreeMap<SalableFlower, Integer>>();
-//
-//        return null;//flowers.subMap(left, right);
-//    }
-
     /**
      *
      * @return
@@ -145,7 +135,7 @@ public class BouquetOfFlowers implements Salable {
     @Override
     public String toString() {
         return "BouquetOfFlowers{" +
-                "flowers=" + flowers +
+                "flowers=" + listOfFlowers +//flowers +
                 '}';
      }
 }

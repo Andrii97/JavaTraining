@@ -56,29 +56,34 @@ public class Controller {
      */
     public void processUser(){
         ArrayList<Flower> flowers = initFlower();
+        view.printMessage("Initial flowers");
         view.printMessage(flowers.toString());
+        view.printMessage("");
+        view.printMessage("Initial salableFlowers");
         ArrayList<SalableFlower> salableFlowers = initSalableFlower(flowers);
         view.printMessage(salableFlowers.toString());
+        view.printMessage("");
 
         BouquetOfFlowers bouquet = model.createBouquetOfFlowers(salableFlowers);
+        view.printMessage("Initial bouquet");
         view.printMessage(bouquet.toString());
+        view.printMessage("");
 
+        view.printMessage("flower to add");
         view.printMessage(salableFlowers.get(1).toString());
+        view.printMessage("");
+
+        view.printMessage("New bouquet");
         bouquet.addFlower(salableFlowers.get(1));
         view.printMessage(bouquet.toString());
+        view.printMessage("");
 
-        bouquet.removeFlower(salableFlowers.get(1));
-        view.printMessage(bouquet.toString());
-        view.printMessage(bouquet.getListOfFlowers().toString());
-        view.printMessage("\n");
         view.printMessage("SortByDateSupply");
         bouquet.sortByDateOfSupply();
-        view.printMessage(bouquet.getListOfFlowers().toString());
-        view.printMessage("\n");
         view.printMessage(bouquet.toString());
+        view.printMessage("");
 
-        view.printMessage(bouquet.getListOfFlowers().toString());
-
+        view.printMessage("SortByLengthOfPlantStemRange [15.3; 18.8]");
         view.printMessage(bouquet.getFlowersByLengthOfPlantStemRange(15.3, 18.8).toString());
 
     }
