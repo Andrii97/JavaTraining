@@ -15,23 +15,6 @@ import java.util.*;
 public class Controller {
 
     /**
-     *  max price for salableFlower
-     */
-    final static int MAX_PRICE = 1234;
-    /**
-     * year for dateOfSupply salableFlower
-     */
-    final static int YEAR = 2016;
-    /**
-     * max month for dateOfSupply salableFlower
-     */
-    final static int MAX_MONTH = 12;
-    /**
-     * max day for dateOfSupply salableFlower
-     */
-    final static int MAX_DAY = 27;
-
-    /**
      *
      */
     Model model;
@@ -112,8 +95,9 @@ public class Controller {
         for (Flower flower : flowers) {
             Random random = new Random();
             SalableFlower salableFlower = new SalableFlower(flower,
-                    random.nextDouble() * MAX_PRICE, LocalDate.of(YEAR,
-                    Month.of(random.nextInt(MAX_MONTH) + 1), random.nextInt(MAX_DAY) + 1));
+                    random.nextDouble() * GlobalConstants.MAX_PRICE, LocalDate.of(GlobalConstants.YEAR,
+                    Month.of(random.nextInt(GlobalConstants.MAX_MONTH) + 1),
+                            random.nextInt(GlobalConstants.MAX_DAY) + 1));
             salableFlowers.add(salableFlower);
         }
         return salableFlowers;
