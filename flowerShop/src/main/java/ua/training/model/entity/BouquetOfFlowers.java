@@ -14,7 +14,7 @@ public class BouquetOfFlowers implements Salable {
 //    private TreeMap<SalableFlower, Integer> flowers;
 
     /**
-     *
+     * List of salable flowers
      */
     private ArrayList<SalableFlower> listOfFlowers;
 
@@ -72,6 +72,9 @@ public class BouquetOfFlowers implements Salable {
 //        return false;
     }
 
+    /**
+     * Sorting list of flower by date of supply
+     */
     public void sortByDateOfSupply(){
         Comparator comparatorByDateOfSupply = new Comparator() {
             @Override
@@ -94,6 +97,12 @@ public class BouquetOfFlowers implements Salable {
         Collections.sort(listOfFlowers, comparatorByDateOfSupply);
     }
 
+    /**
+     * Get list of flowers which is in the range [left;right]
+     * @param left left limit
+     * @param right right limit
+     * @return new list of appropriate flowers
+     */
     public ArrayList<SalableFlower> getFlowersByLengthOfPlantStemRange(double left, double right) {
         ArrayList<SalableFlower> result = new ArrayList<>();
         for(SalableFlower f : listOfFlowers) {
@@ -106,8 +115,8 @@ public class BouquetOfFlowers implements Salable {
     }
 
     /**
-     *
-     * @return
+     * Get total price of bouquet
+     * @return total price
      */
     @Override
     public double getPrice() {
@@ -129,7 +138,7 @@ public class BouquetOfFlowers implements Salable {
 
     @Override
     public LocalDate getDateOfSupply() {
-        return null;
+        return dateOfSupply;
     }
 
     @Override
