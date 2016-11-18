@@ -9,7 +9,7 @@ public enum FlowerColor {
     PURPLE("purple");
 
     /**
-     *
+     * Name of Color
      */
     private final String name;
 

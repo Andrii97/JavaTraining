@@ -11,7 +11,7 @@ public enum Genus {
     TULIP("Tulip");
 
     /**
-     *
+     * Name of Genus
      */
     private final String name;
 

@@ -5,28 +5,28 @@ package ua.training.model.entity;
  */
 public class Flower {
     /**
-     *
+     * Name of flower
      */
     private String name;
 
     /**
-     *
+     * Color of flower
      */
     private FlowerColor color;
 
     /**
-     *
+     * Genus of Flower
      */
     private Genus genus;
 
     /**
-     *
+     * Length of plant stem
      */
     private double lengthOfPlantStem;
 
     /**
-     *
-     * @param name
+     * Parameterized constructor with all parameters
+     * @param
      * @param color
      * @param genus
      * @param lengthOfPlantStem

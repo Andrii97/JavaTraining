@@ -8,22 +8,22 @@ import java.time.LocalDate;
 public class SalableFlower implements Salable, Comparable {
 
     /**
-     *
+     * The flower
      */
     private Flower flower;
 
     /**
-     *
+     * The price of flower
      */
     private double price;
 
     /**
-     *
+     * The date of supply
      */
     private LocalDate dateOfSupply;
 
     /**
-     *
+     * Parameterized constructor with all parameters
      * @param flower
      * @param price
      * @param dateOfSupply

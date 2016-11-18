@@ -14,7 +14,7 @@ public class BouquetOfFlowers implements Salable {
     private TreeMap<SalableFlower, Integer> flowers;
 
     /**
-     *
+     * The Date of Supply
      */
     private LocalDate dateOfSupply;
 
@@ -27,6 +27,10 @@ public class BouquetOfFlowers implements Salable {
         return null;
     }
 
+    /**
+     * Add flower to bouquet of flowers
+     * @param salableFlower flower that you want to add
+     */
     public void addFlower(SalableFlower salableFlower) {
         if (salableFlower == null) {
             return;
@@ -40,6 +44,11 @@ public class BouquetOfFlowers implements Salable {
         }
     }
 
+    /**
+     * Remove flower from bouquet of flowers
+     * @param flower
+     * @return
+     */
     public boolean removeFlower(SalableFlower flower) {
         if (flower == null) {
             return false;

@@ -12,9 +12,9 @@ import java.util.Collection;
 public class Model {
 
     /**
-     *
-     * @param flowers
-     * @return
+     * Create BouquetOfFlowers from list of SalableFlower
+     * @param flowers ArrayList of SalableFlower
+     * @return BouquetOfFlowers
      */
     public BouquetOfFlowers createBouquetOfFlowers(ArrayList<SalableFlower> flowers) {
         BouquetOfFlowers bouquet = new BouquetOfFlowers();
