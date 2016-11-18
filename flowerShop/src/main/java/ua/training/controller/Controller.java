@@ -62,11 +62,25 @@ public class Controller {
 
         BouquetOfFlowers bouquet = model.createBouquetOfFlowers(salableFlowers);
         view.printMessage(bouquet.toString());
+
         view.printMessage(salableFlowers.get(1).toString());
         bouquet.addFlower(salableFlowers.get(1));
         view.printMessage(bouquet.toString());
+
         bouquet.removeFlower(salableFlowers.get(1));
         view.printMessage(bouquet.toString());
+        view.printMessage(bouquet.getListOfFlowers().toString());
+        view.printMessage("\n");
+        view.printMessage("SortByDateSupply");
+        bouquet.sortByDateOfSupply();
+        view.printMessage(bouquet.getListOfFlowers().toString());
+        view.printMessage("\n");
+        view.printMessage(bouquet.toString());
+
+        view.printMessage(bouquet.getListOfFlowers().toString());
+
+        view.printMessage(bouquet.getFlowersByLengthOfPlantStemRange(15.3, 18.8).toString());
+
     }
 
     /**
@@ -94,7 +108,7 @@ public class Controller {
             Random random = new Random();
             SalableFlower salableFlower = new SalableFlower(flower,
                     random.nextDouble() * MAX_PRICE, LocalDate.of(YEAR,
-                    Month.of(MAX_MONTH), random.nextInt(MAX_DAY) + 1));
+                    Month.of(random.nextInt(MAX_MONTH) + 1), random.nextInt(MAX_DAY) + 1));
             salableFlowers.add(salableFlower);
         }
         return salableFlowers;

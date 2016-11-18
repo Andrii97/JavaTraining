@@ -92,8 +92,8 @@ public class SalableFlower implements Salable, Comparable {
     public String toString() {
         return "SalableFlower{" +
                 "flower=" + flower +
-                /*", price=" + price +
-                ", dateOfSupply=" + dateOfSupply*/ +
+                /*", price=" + price + */
+                ", dateOfSupply=" + dateOfSupply +
                 '}';
     }
 
