@@ -2,13 +2,17 @@ package ua.training;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import ua.training.init.FlowerInit;
 import ua.training.model.Model;
 import ua.training.model.entity.*;
 
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.function.Predicate;
+
 import ua.training.controller.GlobalConstants;
 import static org.junit.Assert.*;
 
@@ -24,10 +28,8 @@ public class BouquetOfFlowersTest {
     public static void init() {
         model = new Model();
         ArrayList<Flower> flowers = new ArrayList<>();
-        for (FlowerInit f : FlowerInit.values()) {
-            Flower flower = new Flower(f.getName(), f.getColor(), f.getGenus(),
-                    f.getLengthOfPlantStem());
-            flowers.add(flower);
+        for (FlowerInit flower : FlowerInit.values()) {
+            flowers.add(flower.getFlower());
         }
         ArrayList<SalableFlower> salableFlowers = new ArrayList<>();
         for (Flower flower : flowers) {
@@ -42,9 +44,12 @@ public class BouquetOfFlowersTest {
     }
 
     @Test
-    public void getFlowersByLengthOfPlantStemRangeTest(){
-        ArrayList<SalableFlower> flowers = bouquetOfFlowers
-                .getFlowersByLengthOfPlantStemRange(LEFT_LIMIT, RIGHT_LIMIT);
+    public void findFlowersTest(){
+        Predicate<SalableFlower> condition = i -> (i.getFlower()
+                .getLengthOfPlantStem() > GlobalConstants.MIN_LENGTH_OF_PLANT_STEM) &&
+                (i.getFlower().getLengthOfPlantStem() < GlobalConstants.MAX_LENGTH_OF_PLANT_STEM);
+        List<SalableFlower> flowers = bouquetOfFlowers
+                .findFlowers(condition);
         for(SalableFlower salableFlower : flowers) {
             double length = salableFlower.getFlower().getLengthOfPlantStem();
             assertFalse(length <= LEFT_LIMIT && length >= RIGHT_LIMIT);

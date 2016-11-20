@@ -1,7 +1,9 @@
 package ua.training.model.entity;
 
 /**
- * Created by andrii on 18.11.16.
+ * This enum contains genuses that can be used for genus of flower
+ * @author Andrii Severin
+ * @version 1.0 18 NOV 2016
  */
 public enum Genus {
     GERBERA("Gerbera"),

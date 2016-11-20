@@ -7,9 +7,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 /**
- * Created by andrii on 18.11.16.
+ * This class represents Model unit of MVC based architecture of program "FlowerShop"
+ * @author Andrii Severin
+ * @version 1.0 18 NOV 2016
  */
 public class Model {
+
+    public ArrayList<BouquetOfFlowers> listOfBouquetOfFlowers = new ArrayList<>();
 
     /**
      * Create BouquetOfFlowers from list of SalableFlower
@@ -24,5 +28,15 @@ public class Model {
         return bouquet;
     }
 
+    /**
+     * Add bouquetOfFlowers to list of bouquetOfFlowers
+     * @param bouquet Bouquet that you want to add
+     */
+    public void addBouquetOfFlowers(BouquetOfFlowers bouquet) {
+        listOfBouquetOfFlowers.add(bouquet);
+    }
 
+    public ArrayList<BouquetOfFlowers> getListOfBouquetOfFlowers() {
+        return listOfBouquetOfFlowers;
+    }
 }

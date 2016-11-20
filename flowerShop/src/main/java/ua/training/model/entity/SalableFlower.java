@@ -3,12 +3,14 @@ package ua.training.model.entity;
 import java.time.LocalDate;
 
 /**
- * Created by andrii on 18.11.16.
+ * This class represents common and functionality of salableFlower entity
+ * @author Andrii Severin
+ * @version 1.0 18 NOV 2016
  */
 public class SalableFlower implements Salable, Comparable {
 
     /**
-     * The flower
+     * Reference to flower entity
      */
     private Flower flower;
 
@@ -23,10 +25,10 @@ public class SalableFlower implements Salable, Comparable {
     private LocalDate dateOfSupply;
 
     /**
-     * Parameterized constructor with all parameters
-     * @param flower
-     * @param price
-     * @param dateOfSupply
+     * Initializes fields of salableFlower entity
+     * @param flower Reference to flower entity
+     * @param price The price of flower
+     * @param dateOfSupply The date of supply
      */
     public SalableFlower(Flower flower, double price, LocalDate dateOfSupply) {
         this.flower = flower;

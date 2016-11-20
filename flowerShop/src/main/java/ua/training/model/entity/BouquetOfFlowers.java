@@ -2,9 +2,13 @@ package ua.training.model.entity;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
- * Created by andrii on 18.11.16.
+ * This class represents state and functionality of bouquetOfFlowers entity
+ * @author Andrii Severin
+ * @version 1.0 18 NOV 2016
  */
 public class BouquetOfFlowers implements Salable {
 
@@ -18,6 +22,9 @@ public class BouquetOfFlowers implements Salable {
      */
     private LocalDate dateOfSupply;
 
+    /**
+     * Initializes fields
+     */
     public BouquetOfFlowers() {
         dateOfSupply = LocalDate.now();
         listOfFlowers = new ArrayList<>();
@@ -35,59 +42,35 @@ public class BouquetOfFlowers implements Salable {
     }
 
     /**
-     * Remove flower from bouquet of flowers
-     * @param flower
-     * @return
+     * Removes flower from bouquet of flowers
+     * @param flower flower that you want to remove
+     * @return <tt>true</tt> if this list contained the specified element
      */
     public boolean removeFlower(SalableFlower flower) {
         return listOfFlowers.remove(flower);
     }
 
     /**
-     * Sorting list of flower by date of supply
+     * Sorts list of flower by date of supply
      */
     public void sortByDateOfSupply(){
-        Comparator comparatorByDateOfSupply = new Comparator() {
-            @Override
-            public int compare(Object o1, Object o2) {
-                if (o1.equals(o2)) {
-                    return 0;
-                } else if (((SalableFlower)o1).getDateOfSupply().getMonthValue() >
-                        ((SalableFlower)o2).getDateOfSupply().getMonthValue()) {
-                    return 1;
-                } else if (((SalableFlower)o1).getDateOfSupply().getMonthValue() ==
-                        ((SalableFlower)o2).getDateOfSupply().getMonthValue() &&
-                        ((SalableFlower)o1).getDateOfSupply().getDayOfMonth() >
-                                ((SalableFlower)o2).getDateOfSupply().getDayOfMonth()) {
-                    return 1;
-                } else {
-                        return -1;
-                }
-            }
-        };
+        Comparator comparatorByDateOfSupply = Comparator
+                .comparing(SalableFlower::getDateOfSupply);
         Collections.sort(listOfFlowers, comparatorByDateOfSupply);
     }
 
     /**
-     * Get list of flowers which is in the range [left;right]
-     * @param left left limit
-     * @param right right limit
-     * @return new list of appropriate flowers
+     * Finds list of salableFlowers that app
+     * @param condition Predicate to filter salableFlowers.
+     * @return List of appropriate salableFlowers
      */
-    public ArrayList<SalableFlower> getFlowersByLengthOfPlantStemRange(double left, double right) {
-        ArrayList<SalableFlower> result = new ArrayList<>();
-        for(SalableFlower f : listOfFlowers) {
-            double length = f.getFlower().getLengthOfPlantStem();
-            if (length > left && length < right) {
-                result.add(f);
-            }
-        }
-        return result;
+    public List<SalableFlower> findFlowers(Predicate<SalableFlower> condition) {
+        return listOfFlowers.stream().filter(condition).collect(Collectors.toList());
     }
 
     /**
      * Get total price of bouquet
-     * @return total price
+     * @return Total price
      */
     @Override
     public double getPrice() {

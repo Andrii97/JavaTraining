@@ -1,7 +1,9 @@
 package ua.training.model.entity;
 
 /**
- * Created by andrii on 18.11.16.
+ * This class represents common state and functionality of flower entity
+ * @author Andrii Severin
+ * @version 1.0 18 NOV 2016
  */
 public class Flower {
     /**
@@ -25,11 +27,11 @@ public class Flower {
     private double lengthOfPlantStem;
 
     /**
-     * Parameterized constructor with all parameters
-     * @param
-     * @param color
-     * @param genus
-     * @param lengthOfPlantStem
+     * Initializes fields of flower entity
+     * @param name Name of flower
+     * @param color Color of flower
+     * @param genus Genus of Flower
+     * @param lengthOfPlantStem Length of plant stem
      */
     public Flower(String name, FlowerColor color, Genus genus, double lengthOfPlantStem) {
         this.name = name;

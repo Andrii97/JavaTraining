@@ -1,5 +1,6 @@
 package ua.training.controller;
 
+import ua.training.init.FlowerInit;
 import ua.training.model.Model;
 import ua.training.model.entity.*;
 import ua.training.view.View;
@@ -7,27 +8,30 @@ import ua.training.view.View;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.*;
+import java.util.function.Predicate;
 
 
 /**
- * Created by andrii on 18.11.16.
+ * This class represents Controller unit of MVC based architecture of program "FlowerShop".
+ * @author Andrii Severin
+ * @version 1.0 18 NOV 2016
  */
 public class Controller {
 
     /**
-     *
+     * Reference to model unit of MVC based architecture of program
      */
     Model model;
 
     /**
-     *
+     * Reference to view unit of MVC based architecture of program
      */
     View view;
 
     /**
-     * initialize model and view
-     * @param model
-     * @param view
+     * Initializes model and view
+     * @param model reference to model unit of application
+     * @param view reference to view unit of application
      */
     public Controller(Model model, View view) {
         this.model  = model;
@@ -35,58 +39,58 @@ public class Controller {
     }
 
     /**
-     *
+     * Runs main program cycle
      */
     public void processUser(){
         ArrayList<Flower> flowers = initFlower();
-        view.printMessage("Initial flowers");
+        view.printMessage(View.INITIAL + View.FLOWERS);
         view.printMessage(flowers.toString());
-        view.printMessage("");
-        view.printMessage("Initial salableFlowers");
+        view.printMessage(View.EMPTY_LINE);
+        view.printMessage(View.INITIAL + View.SALABLE_FLOWERS);
         ArrayList<SalableFlower> salableFlowers = initSalableFlower(flowers);
         view.printMessage(salableFlowers.toString());
-        view.printMessage("");
+        view.printMessage(View.EMPTY_LINE);
 
         BouquetOfFlowers bouquet = model.createBouquetOfFlowers(salableFlowers);
-        view.printMessage("Initial bouquet");
+        view.printMessage(View.INITIAL + View.BOUQUET);
         view.printMessage(bouquet.toString());
-        view.printMessage("");
+        view.printMessage(View.EMPTY_LINE);
 
-        view.printMessage("flower to add");
+        view.printMessage(View.FLOWER_TO_ADD);
         view.printMessage(salableFlowers.get(1).toString());
-        view.printMessage("");
+        view.printMessage(View.EMPTY_LINE);
 
-        view.printMessage("New bouquet");
+        view.printMessage(View.BOUQUET);
         bouquet.addFlower(salableFlowers.get(1));
         view.printMessage(bouquet.toString());
-        view.printMessage("");
+        view.printMessage(View.EMPTY_LINE);
 
-        view.printMessage("SortByDateSupply");
+        view.printMessage(View.SORT_BY_DATE_OF_SUPPLY);
         bouquet.sortByDateOfSupply();
         view.printMessage(bouquet.toString());
-        view.printMessage("");
+        view.printMessage(View.EMPTY_LINE);
 
-        view.printMessage("SortByLengthOfPlantStemRange [15.3; 18.8]");
-        view.printMessage(bouquet.getFlowersByLengthOfPlantStemRange(15.3, 18.8).toString());
-
+        view.printMessage(View.FLOWERS_THAT_ARE_IN_RANGE);
+        Predicate<SalableFlower> condition = i -> (i.getFlower()
+                .getLengthOfPlantStem() > GlobalConstants.MIN_LENGTH_OF_PLANT_STEM) &&
+                (i.getFlower().getLengthOfPlantStem() < GlobalConstants.MAX_LENGTH_OF_PLANT_STEM);
+        view.printMessage(bouquet.findFlowers(condition).toString());
     }
 
     /**
-     * Initialization flowers
+     * Initializes flowers
      * @return ArrayList of flower
      */
     public ArrayList<Flower> initFlower() {
         ArrayList<Flower> flowers = new ArrayList<>();
-        for (FlowerInit f : FlowerInit.values()) {
-            Flower flower = new Flower(f.getName(), f.getColor(), f.getGenus(),
-                    f.getLengthOfPlantStem());
-            flowers.add(flower);
+        for (FlowerInit flower : FlowerInit.values()) {
+            flowers.add(flower.getFlower());
         }
         return flowers;
     }
 
     /**
-     * Initialization salableFlowers
+     * Initializes salableFlowers
      * @param flowers ArrayList of flower
      * @return ArrayList of salableFlower
      */
