@@ -5,12 +5,17 @@ import ua.training.model.Model;
 import ua.training.view.View;
 
 /**
- *
- *
+ * This class is used for initialization and to start the program
+ * @author Andrii Severin
+ * @version 1.0 18 NOV 2016
  */
 public class Main
 {
-    public static void main( String[] args ) throws Exception {
+    /**
+     *  Initializes all units of MVC architecture and runs the processUser
+     * @param args do not used
+     */
+    public static void main( String[] args ){
         // Initialization
         Model model = new Model();
         View view = new View();
