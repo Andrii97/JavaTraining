@@ -8,11 +8,6 @@ import java.util.*;
  */
 public class BouquetOfFlowers implements Salable {
 
-//    /**
-//     *
-//     */
-//    private TreeMap<SalableFlower, Integer> flowers;
-
     /**
      * List of salable flowers
      */
@@ -24,7 +19,6 @@ public class BouquetOfFlowers implements Salable {
     private LocalDate dateOfSupply;
 
     public BouquetOfFlowers() {
-        // flowers = new TreeMap<>();
         dateOfSupply = LocalDate.now();
         listOfFlowers = new ArrayList<>();
     }
@@ -38,13 +32,6 @@ public class BouquetOfFlowers implements Salable {
             return;
         }
         listOfFlowers.add(salableFlower);
-//        if (flowers.containsKey(salableFlower)) {
-//            flowers.replace(
-//                    salableFlower,
-//                    flowers.get(salableFlower) + 1);
-//        } else {
-//            flowers.put(salableFlower, 1);
-//        }
     }
 
     /**
@@ -53,23 +40,7 @@ public class BouquetOfFlowers implements Salable {
      * @return
      */
     public boolean removeFlower(SalableFlower flower) {
-        if (flower == null) {
-            return false;
-        }
-        listOfFlowers.remove(flower);
-        return true;
-//        if (flowers.containsKey(flower)) {
-//            if (flowers.get(flower) > 1) {
-//                flowers.replace(
-//                        flower,
-//                        flowers.get(flower) - 1
-//                );
-//            } else {
-//                flowers.remove(flower);
-//            }
-//            return true;
-//        }
-//        return false;
+        return listOfFlowers.remove(flower);
     }
 
     /**
@@ -111,7 +82,7 @@ public class BouquetOfFlowers implements Salable {
                 result.add(f);
             }
         }
-        return result;//flowers.subMap(left, right);
+        return result;
     }
 
     /**
@@ -121,14 +92,9 @@ public class BouquetOfFlowers implements Salable {
     @Override
     public double getPrice() {
         double price = 0;
-
         for (SalableFlower flower : listOfFlowers) {
             price += flower.getPrice();
         }
-
-//        for(Map.Entry<SalableFlower, Integer> flower : flowers.entrySet()) {
-//            price += flower.getKey().getPrice();
-//        }
         return price;
     }
 
