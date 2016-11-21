@@ -10,7 +10,8 @@ public class AdapterApp {
         g1.drawLine();;
         g1.drawSquare();
         // 2nd way through composition
-        VectorGraphicsInterface g2 = new VectorAdapterFromRaster2();
+        VectorGraphicsInterface g2 = new VectorAdapterFromRaster2(
+                new RasterGraphics());
         g2.drawLine();;
         g2.drawSquare();
 
@@ -44,7 +45,12 @@ implements VectorGraphicsInterface{
 }
 
 class VectorAdapterFromRaster2 implements VectorGraphicsInterface{
-    RasterGraphics raster = new RasterGraphics();
+    RasterGraphics raster = null; //new RasterGraphics();
+
+    public VectorAdapterFromRaster2(RasterGraphics raster) {
+        this.raster = raster;
+    }
+
     @Override
     public void drawLine() {
         raster.drawRasterLine();
