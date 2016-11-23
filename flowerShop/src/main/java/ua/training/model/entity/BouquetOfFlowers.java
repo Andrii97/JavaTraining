@@ -15,7 +15,12 @@ public class BouquetOfFlowers implements Salable {
     /**
      * List of salable flowers
      */
-    private ArrayList<SalableFlower> listOfFlowers;
+    private List<SalableFlower> listOfFlowers;
+
+    /**
+     * List of accessory
+     */
+    private List<Accessory> listOfAccessory;
 
     /**
      * The Date of Supply
@@ -28,6 +33,27 @@ public class BouquetOfFlowers implements Salable {
     public BouquetOfFlowers() {
         dateOfSupply = LocalDate.now();
         listOfFlowers = new ArrayList<>();
+        listOfAccessory = new ArrayList<>();
+    }
+
+    /**
+     * Add accessory to bouquet of flowers
+     * @param accessory that you want to add
+     */
+    public void addAccessory(Accessory accessory) {
+        if (accessory == null) {
+            return;
+        }
+        listOfAccessory.add(accessory);
+    }
+
+    /**
+     * Removes accessory from bouquet of flowers
+     * @param accessory accessory that you want to remove
+     * @return <tt>true</tt> if this list contained the specified element
+     */
+    public boolean removeAccessory(Accessory accessory) {
+        return listOfAccessory.remove(accessory);
     }
 
     /**
@@ -78,11 +104,18 @@ public class BouquetOfFlowers implements Salable {
         for (SalableFlower flower : listOfFlowers) {
             price += flower.getPrice();
         }
+        for (Accessory accessory : listOfAccessory) {
+            price += accessory.getPrice();
+        }
         return price;
     }
 
-    public ArrayList<SalableFlower> getListOfFlowers() {
+    public List<SalableFlower> getListOfFlowers() {
         return listOfFlowers;
+    }
+
+    public List<Accessory> getListOfAccessory() {
+        return listOfAccessory;
     }
 
     @Override

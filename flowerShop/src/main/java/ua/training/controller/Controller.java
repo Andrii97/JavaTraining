@@ -27,6 +27,7 @@ public class Controller {
      * Reference to view unit of MVC based architecture of program
      */
     View view;
+    ArrayList<Flower> flowers = initFlower();
 
     /**
      * Initializes model and view
@@ -42,7 +43,7 @@ public class Controller {
      * Runs main program cycle
      */
     public void processUser(){
-        ArrayList<Flower> flowers = initFlower();
+
         view.printMessage(View.INITIAL + View.FLOWERS);
         view.printMessage(flowers.toString());
         view.printMessage(View.EMPTY_LINE);
