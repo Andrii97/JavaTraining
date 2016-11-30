@@ -114,10 +114,88 @@ public class MyTreeSet<T extends Comparable> implements Set<T>, NavigableSet<T> 
         return true;
     }
 
-    @Override
-    public boolean remove(Object o) {
-        return false;
+
+    Node<T> findMaxLeftNode(Node<T> obj){
+        Node<T> current = obj;
+        current = current.rightNode;
+        if(current == null)
+            return null;
+        while(current.leftNode != null){
+            current = current.leftNode;
+        }
+        return current;
     }
+
+    Node<T> findMinRightNode(Node<T> obj){
+        Node<T> current = obj;
+        current = current.leftNode;
+        if(current == null)
+            return null;
+        while(current.rightNode != null){
+            current = current.rightNode;
+        }
+        return current;
+    }
+
+    public boolean remove(Object dataObject) {
+        Objects.requireNonNull(dataObject);
+        T dataObjectForRemove = (T) dataObject;
+        Node<T> currentNode = rootNode;
+        while (currentNode != null) {
+            int compareResult = dataObjectForRemove.compareTo(currentNode.dataObject);
+            if (compareResult == 0) {
+                break;
+            } else if (compareResult < 0) {
+                currentNode = currentNode.leftNode;
+            } else {
+                currentNode = currentNode.rightNode;
+            }
+        }
+        if (currentNode == null)
+            return false;
+        Node<T> maxLeftNode = findMaxLeftNode(currentNode);
+        Node<T> minRightNode = findMinRightNode(currentNode);
+        if(currentNode == rootNode) {
+            if(maxLeftNode == null) {
+                rootNode = minRightNode;
+            } else {
+                rootNode = maxLeftNode;
+            }
+            collectionSize--;
+            return true;
+        }
+        if(maxLeftNode == null ) {
+            if(minRightNode == null) {
+                collectionSize--;
+                return true;
+            }
+            else if(minRightNode.rightNode == null) {
+                    minRightNode.parentNode.leftNode = null;
+            } else {
+                minRightNode.parentNode.leftNode = minRightNode.rightNode;
+            }
+            if(currentNode.parentNode.leftNode == currentNode)
+                currentNode.parentNode.leftNode = minRightNode;
+            else
+                currentNode.parentNode.rightNode = minRightNode;
+            collectionSize--;
+            return true;
+        } else {
+            if(maxLeftNode.leftNode == null) {
+                maxLeftNode.parentNode.rightNode = null;
+            } else {
+                maxLeftNode.parentNode.rightNode = maxLeftNode.leftNode;
+            }
+            if(currentNode.parentNode.leftNode == currentNode)
+                currentNode.parentNode.leftNode = maxLeftNode;
+            else
+                currentNode.parentNode.rightNode = maxLeftNode;
+            collectionSize--;
+            return true;
+        }
+        // severinandrey97@gmail.com
+    }
+
 
 
     /**
