@@ -1,7 +1,10 @@
 package ua.training.controller;
 
 import ua.training.model.Model;
+import ua.training.model.entity.Composite;
 import ua.training.view.View;
+
+import java.io.Console;
 
 /**
  * This class represents Controller unit of MVC based architecture of program "TextAnalyzer".
@@ -34,7 +37,9 @@ public class Controller {
      * Runs main program cycle
      */
     public void processUser(){
+        Composite text = model.loadText();
 
+        view.printMessage(text.print().toString());
     }
 
 }
