@@ -4,7 +4,10 @@ import java.util.Map;
 import java.util.WeakHashMap;
 
 /**
- * Created by andrii on 11.12.16.
+ * Factory that create symbol objects.
+ * Realization based on flyweight and singleton patterns.
+ * @author Andrii Severin
+ * @version 1.0 11 DEC 2016
  */
 public class SymbolFactory {
     /**

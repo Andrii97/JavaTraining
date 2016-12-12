@@ -7,7 +7,15 @@ package ua.training.model.entity;
  * @version 1.0 11 DEC 2016
  */
 public interface TextElement {
+    /**
+     * Get type of TextElement
+     * @return
+     */
     TypeOfTextElement getType();
 
+    /**
+     * Collect text to StringBuilder
+     * @return text of TextElement
+     */
     StringBuilder print();
 }

@@ -31,7 +31,10 @@ public class Model {
                     currentSentence.addComponent(currentWord);
                     currentWord = new Composite(TypeOfTextElement.WORD);
                 }
-                currentSentence.addComponent(symbol);
+                if(!symbol.isNewParagraph()) {
+                    currentSentence.addComponent(symbol);
+                }
+
                 if(symbol.isNewSentence()) {
                     if(!currentSentence.isEmpty()) {
                         currentParagraph.addComponent(currentSentence);
@@ -44,6 +47,7 @@ public class Model {
                             currentParagraph.addComponent(currentSentence);
                             currentSentence = new Composite(TypeOfTextElement.SENTENCE);
                         }
+                        currentParagraph.addComponent(symbol);
                         text.addComponent(currentParagraph);
                         currentParagraph = new Composite(TypeOfTextElement.PARAGRAPH);
                     }
