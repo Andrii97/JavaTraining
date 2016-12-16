@@ -16,6 +16,9 @@ public enum TypeOfSymbol {
     SPACE("[ ]"),
     OTHER("");
 
+    /**
+     * A pattern of regular expression
+     */
     private Pattern pattern;
 
     TypeOfSymbol(String regex) {

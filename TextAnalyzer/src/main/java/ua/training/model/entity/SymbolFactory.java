@@ -29,7 +29,6 @@ public class SymbolFactory {
     /**
      * Returns object from cache if exists or create new {@link Symbol} object,
      * add that object to cache and returns it.
-     *
      * @param c bases on char returns {@link Symbol} object
      * @return converted char to Symbol object
      */

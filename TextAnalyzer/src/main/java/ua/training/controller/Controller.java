@@ -4,15 +4,12 @@ import ua.training.model.Model;
 import ua.training.model.entity.Composite;
 import ua.training.view.View;
 
-import java.io.Console;
-
 /**
  * This class represents Controller unit of MVC based architecture of program "TextAnalyzer".
  * @author Andrii Severin
  * @version 1.0 08 DEC 2016
  */
 public class Controller {
-
     /**
      * Reference to model unit of MVC based architecture of program
      */
@@ -38,8 +35,10 @@ public class Controller {
      */
     public void processUser(){
         Composite text = model.loadText();
-
-        view.printMessage(text.print().toString());
+        view.printMessage(view.ORIGINAL_TEXT);
+        view.printMessage(text.getContent().toString());
+        view.printMessage(view.UPDATED_TEXT);
+        view.printMessage(model.removeWords(text, 2).getContent().toString());
     }
 
 }

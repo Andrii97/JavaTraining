@@ -3,7 +3,7 @@ package ua.training.model.entity;
 import java.util.List;
 
 /**
- * Class that describes container objects in composite pattern.
+ * Interface that describes container objects in composite pattern.
  * Stores list of {@link TextElement} class objects.
  * Can store another composites.
  * @author Andrii Severin
@@ -19,5 +19,24 @@ public interface Container extends TextElement {
      */
     boolean isEmpty();
 
+    /**
+     * Get components of composite
+     * @return list of components
+     */
     List<TextElement> getComponents();
+
+    /**
+     * Count child of composite
+     * @return number of childs
+     */
+    int countChilds();
+// TODO it is necessary? + javadoc
+    /**
+     *
+     * @param index
+     * @return
+     */
+    TextElement getComponent(int index);
+
+
 }

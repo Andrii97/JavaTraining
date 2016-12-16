@@ -6,12 +6,13 @@ package ua.training.view;
  * @version 1.0 08 DEC 2016
  */
 public class View {
-
     // Text's constants
+    public static final String ORIGINAL_TEXT = "Original text";
+    public static final String UPDATED_TEXT = "Updated text";
 
     /**
      * Print message
-     * @param message information to print
+     * @param message information to getContent
      */
     public void printMessage(String message){
         System.out.println(message);

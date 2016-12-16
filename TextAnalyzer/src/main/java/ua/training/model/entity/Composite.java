@@ -4,17 +4,20 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- *
+ * Class that describes container objects in composite pattern.
+ * Stores list of {@link TextElement} class objects.
+ * Can store another composites.
  * @author Andrii Severin
  * @version 1.0 11 DEC 2016
  */
 public class Composite implements Container{
     /**
-     *
+     * List of components
      */
     private List<TextElement> components;
+
     /**
-     *
+     * Type Of TextElement
      */
     private TypeOfTextElement type;
 
@@ -49,10 +52,20 @@ public class Composite implements Container{
     }
 
     @Override
-    public StringBuilder print() {
+    public TextElement getComponent(int index) {
+        return components.get(index);
+    }
+
+    @Override
+    public int countChilds() {
+        return components.size();
+    }
+
+    @Override
+    public StringBuilder getContent() {
         StringBuilder string = new StringBuilder();
         for (TextElement textElement : components) {
-            string.append(textElement.print());
+            string.append(textElement.getContent());
         }
         return string;
     }

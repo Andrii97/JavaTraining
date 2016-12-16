@@ -9,7 +9,7 @@ package ua.training.model.entity;
 public interface TextElement {
     /**
      * Get type of TextElement
-     * @return
+     * @return type of TextElement
      */
     TypeOfTextElement getType();
 
@@ -17,5 +17,5 @@ public interface TextElement {
      * Collect text to StringBuilder
      * @return text of TextElement
      */
-    StringBuilder print();
+    StringBuilder getContent();
 }

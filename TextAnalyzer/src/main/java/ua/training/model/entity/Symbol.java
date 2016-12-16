@@ -8,15 +8,17 @@ package ua.training.model.entity;
  */
 public class Symbol implements TextElement {
     /**
-     *
+     * Content of Symbol
      */
     private final char symbol;
+
     /**
-     *
+     * Type of TextElement
      */
     private final TypeOfTextElement type;
+
     /**
-     *
+     * Type of Symbol
      */
     private final TypeOfSymbol typeOfSymbol;
 
@@ -32,23 +34,37 @@ public class Symbol implements TextElement {
         typeOfSymbol = TypeOfSymbol.OTHER;
     }
 
-    public Symbol(char symbol, TypeOfSymbol typeOfSymbol) {
-        this.symbol = symbol;
-        type = TypeOfTextElement.SYMBOL;
-        this.typeOfSymbol = typeOfSymbol;
-    }
-
-    public boolean isCharacter() {
+    /**
+     *
+     * @return
+     */
+    public boolean isCharacter() { // TODO it is necessary?
         return (getTypeOfSymbol() == TypeOfSymbol.VOWEL ||
                 getTypeOfSymbol() == TypeOfSymbol.CONSONANT);
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isNewParagraph() {
         return getTypeOfSymbol() == TypeOfSymbol.NEW_PARAGRAPH;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isNewSentence() {
         return getTypeOfSymbol() == TypeOfSymbol.NEW_SENTENCE;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean isVowel() {
+        return getTypeOfSymbol() == TypeOfSymbol.VOWEL;
     }
 
     public char getSymbol() {
@@ -65,7 +81,7 @@ public class Symbol implements TextElement {
     }
 
     @Override
-    public StringBuilder print() {
+    public StringBuilder getContent() {
         return new StringBuilder().append(getSymbol()); //.append(getTypeOfSymbol()).append( getSymbol()).append('\n');
     }
 }
