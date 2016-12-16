@@ -4,6 +4,7 @@ import ua.training.model.FileSource;
 import ua.training.model.Model;
 import ua.training.model.Source;
 import ua.training.model.entity.Composite;
+import ua.training.model.entity.Container;
 import ua.training.view.View;
 
 /**
@@ -41,7 +42,7 @@ public class Controller {
      * Runs main program cycle
      */
     public void processUser(){
-        Composite text;
+        Container text;
         try (Source sourceOfText = new FileSource(View.FILE_NAME)){
             text = model.loadText(sourceOfText);
         } catch (Exception e) {

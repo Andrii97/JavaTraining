@@ -23,7 +23,7 @@ public class Model {
      * @return composite of text
      * @throws Exception
      */
-    public Composite loadText(Source source) throws Exception {
+    public Container loadText(Source source) throws Exception {
         Objects.requireNonNull(source);
         Composite text = new Composite(TypeOfTextElement.TEXT);
         Composite currentWord = new Composite(TypeOfTextElement.WORD);
