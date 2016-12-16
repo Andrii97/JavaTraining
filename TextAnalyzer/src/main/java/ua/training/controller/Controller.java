@@ -1,6 +1,8 @@
 package ua.training.controller;
 
+import ua.training.model.FileSource;
 import ua.training.model.Model;
+import ua.training.model.Source;
 import ua.training.model.entity.Composite;
 import ua.training.view.View;
 
@@ -21,6 +23,11 @@ public class Controller {
     View view;
 
     /**
+     * Source of text
+     */
+    Source sourceOfText;
+
+    /**
      * Initializes model and view
      * @param model reference to model unit of application
      * @param view reference to view unit of application
@@ -34,10 +41,15 @@ public class Controller {
      * Runs main program cycle
      */
     public void processUser(){
-        Composite text = model.loadText();
-        view.printMessage(view.ORIGINAL_TEXT);
+        Composite text;
+        try (Source sourceOfText = new FileSource(View.FILE_NAME)){
+            text = model.loadText(sourceOfText);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        view.printMessage(View.ORIGINAL_TEXT);
         view.printMessage(text.getContent().toString());
-        view.printMessage(view.UPDATED_TEXT);
+        view.printMessage(View.UPDATED_TEXT);
         view.printMessage(model.removeWords(text, 2).getContent().toString());
     }
 

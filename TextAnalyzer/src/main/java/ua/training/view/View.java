@@ -9,6 +9,9 @@ public class View {
     // Text's constants
     public static final String ORIGINAL_TEXT = "Original text";
     public static final String UPDATED_TEXT = "Updated text";
+    public static final String EMPTY_STREAM = "Empty stream";
+    public static final String CONNECTION_FAIL = "Connection fail";
+    public static final String FILE_NAME = "input.txt";
 
     /**
      * Print message

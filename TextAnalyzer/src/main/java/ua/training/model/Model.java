@@ -4,6 +4,7 @@ import ua.training.model.entity.*;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * This class represents Model unit of MVC based architecture of program "TextAnalyzer"
@@ -11,28 +12,27 @@ import java.util.List;
  * @version 1.0 08 DEC 2016
  */
 public class Model {
-    // TODO: javadoc, new source
-    private static String MY_TEXT = "dfg  ea fg os f. gefr df ads ao g! df\n ef e g!r \t \nad.sd \ndv gbg \nere";
-
     /**
      * Symbol factory
      */
     SymbolFactory symbolFactory = SymbolFactory.getInstance();
 
     /**
-     * Get composite from // TODO source
+     * Get composite from source
+     * @param source source of information
      * @return composite of text
+     * @throws Exception
      */
-    public Composite loadText() {
+    public Composite loadText(Source source) throws Exception {
+        Objects.requireNonNull(source);
         Composite text = new Composite(TypeOfTextElement.TEXT);
         Composite currentWord = new Composite(TypeOfTextElement.WORD);
         Composite currentSentence = new Composite(TypeOfTextElement.SENTENCE);
         Composite currentParagraph = new Composite(TypeOfTextElement.PARAGRAPH);
 
-        char[] data = MY_TEXT.toCharArray();
-
-        for (int i = 0; i < data.length; i++) {
-            Symbol symbol = symbolFactory.getSymbol(data[i]);
+        source.connect();
+        while (source.hasNext()){
+            Symbol symbol = symbolFactory.getSymbol((char)source.readNextCharacter());
             if (!symbol.isCharacter()) {
                 if (!currentWord.isEmpty()) {
                     currentSentence.addComponent(currentWord);
@@ -88,20 +88,18 @@ public class Model {
             return text;
         } else {
             List<TextElement> listOfRemovedElements = new LinkedList<>();
-            List<TextElement> components = text.getComponents();
-            for (TextElement child : components) {
+            for (TextElement child : text.getComponents()) {
                 if(child.getType() == TypeOfTextElement.SYMBOL) {
                     continue;
                 }
                 Container textElement = removeWords((Container) child, length);
                 if (textElement.getType() == TypeOfTextElement.WORD &&
-                        textElement.countChilds() == length) {
-                    if (((Symbol)textElement.getComponent(0)).getTypeOfSymbol() == TypeOfSymbol.VOWEL) {
-                        listOfRemovedElements.add(textElement);
-                    }
+                        textElement.countChilds() == length &&
+                        ((Symbol)textElement.getComponent(0)).isVowel()) {
+                    listOfRemovedElements.add(textElement);
                 }
             }
-            components.removeAll(listOfRemovedElements);
+            listOfRemovedElements.forEach(text::removeComponent);
             return text;
         }
     }
