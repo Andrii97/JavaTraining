@@ -17,5 +17,5 @@ public interface TextElement {
      * Collect text to StringBuilder
      * @return text of TextElement
      */
-    StringBuilder getContent();
+    String getContent();
 }

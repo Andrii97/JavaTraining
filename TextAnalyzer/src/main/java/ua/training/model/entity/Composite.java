@@ -62,11 +62,11 @@ public class Composite implements Container{
     }
 
     @Override
-    public StringBuilder getContent() {
+    public String getContent() {
         StringBuilder string = new StringBuilder();
         for (TextElement textElement : components) {
             string.append(textElement.getContent());
         }
-        return string;
+        return string.toString();
     }
 }

@@ -30,7 +30,7 @@ public interface Container extends TextElement {
      * @return number of childs
      */
     int countChilds();
-// TODO it is necessary? + javadoc
+
     /**
      *
      * @param index

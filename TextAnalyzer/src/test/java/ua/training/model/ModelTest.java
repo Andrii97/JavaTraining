@@ -27,14 +27,14 @@ public class ModelTest {
     @Test
     public void loadTextTest() throws Exception {
         Container text = model.loadText(source);
-        Assert.assertEquals(STRING, text.getContent().toString());
+        Assert.assertEquals(STRING, text.getContent());
     }
 
     @Test
     public void removeWords() throws Exception {
         Container text = model.loadText(source);
         Assert.assertEquals(EXPECTED_STRING,
-                model.removeWords(text, 2).getContent().toString());
+                model.removeWords(text, 2).getContent());
     }
 
 }

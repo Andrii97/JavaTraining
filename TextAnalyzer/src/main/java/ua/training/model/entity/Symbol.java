@@ -6,7 +6,8 @@ package ua.training.model.entity;
  * @author Andrii Severin
  * @version 1.0 11 DEC 2016
  */
-public class Symbol implements TextElement {
+public
+class Symbol implements TextElement {
     /**
      * Content of Symbol
      */
@@ -38,7 +39,7 @@ public class Symbol implements TextElement {
      *
      * @return
      */
-    public boolean isCharacter() { // TODO it is necessary?
+    public boolean isCharacter() {
         return (getTypeOfSymbol() == TypeOfSymbol.VOWEL ||
                 getTypeOfSymbol() == TypeOfSymbol.CONSONANT);
     }
@@ -81,7 +82,8 @@ public class Symbol implements TextElement {
     }
 
     @Override
-    public StringBuilder getContent() {
-        return new StringBuilder().append(getSymbol()); //.append(getTypeOfSymbol()).append( getSymbol()).append('\n');
+    public String getContent() {
+        return new StringBuilder().append(getSymbol()).toString();
+        //.append(getTypeOfSymbol()).append( getSymbol()).append('\n');
     }
 }
